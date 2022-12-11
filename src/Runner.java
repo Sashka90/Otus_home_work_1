@@ -12,8 +12,6 @@ public class Runner {
 
     public static void main(String[] args) {
 
-        CommandsData.values().toString();
-        AnimalTypeData.values().toString();
         String command;
         String typeAnimal;
         ArrayList animal = new ArrayList();
@@ -28,25 +26,25 @@ public class Runner {
                             AnimalTypeData.CAT + "/" + AnimalTypeData.DOG + "/" + AnimalTypeData.DUCK);
                     typeAnimal = scanner.nextLine().trim().toLowerCase();
 
-                    switch (typeAnimal) {
-                        case "cat":
+                    switch (AnimalTypeData.valueOf(typeAnimal.trim().toUpperCase())) {
+                        case CAT:
                             AbsAnimal cat = fillAnimalData(AnimalTypeData.CAT);
                             cat.say();
                             animal.add(cat);
                             continue;
-                        case "dog":
+                        case DOG:
                             AbsAnimal dog = fillAnimalData(AnimalTypeData.DOG);
                             dog.say();
                             animal.add(dog);
                             continue;
-                        case "duck":
+                        case DUCK:
                             AbsAnimal duck = fillAnimalData(AnimalTypeData.DUCK);
                             duck.say();
                             animal.add(duck);
                             continue;
                         default:
                             System.out.println("Неверный ввод, начните заново");
-                    }
+                    };
                 case "LIST":
                     for (int i = 0; i < animal.size(); i++)
                         System.out.println(animal.get(i));
@@ -54,9 +52,12 @@ public class Runner {
 
                 case "EXIT":
                     System.exit(0);
+
+                default:
+                    System.out.println("Неверный ввод!");
             }
         }
-        while (!command.equals("ADD") || !command.equals("LIST") || !command.equals("EXIT"));
+        while (true);
     }
 
     private static AbsAnimal fillAnimalData(AnimalTypeData animalTypeData) {
@@ -78,12 +79,22 @@ public class Runner {
             System.out.println("Повторите ввод");
             ageStr = scanner.next();
         }
+        if (ageStr.equals("0") || ageStr.contains("-")) {
+            System.out.println("Введен неверный возраст");
+            System.out.println("Повторите ввод");
+            ageStr = scanner.next();
+        }
 
         animal.setAge(Integer.parseInt(ageStr));
 
         System.out.println("Какой вес у животного?");
         String weightStr = scanner.next();
         while (!isNumber(weightStr)) {
+            System.out.println("Введен неверный вес");
+            System.out.println("Повторите ввод");
+            weightStr = scanner.next();
+        }
+        if (weightStr.equals("0") || weightStr.contains("-")) {
             System.out.println("Введен неверный вес");
             System.out.println("Повторите ввод");
             weightStr = scanner.next();
@@ -102,5 +113,4 @@ public class Runner {
             return false;
         }
     }
-
 }
