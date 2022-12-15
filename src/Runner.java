@@ -26,25 +26,24 @@ public class Runner {
                             AnimalTypeData.CAT + "/" + AnimalTypeData.DOG + "/" + AnimalTypeData.DUCK);
                     typeAnimal = scanner.nextLine().trim().toLowerCase();
 
+                    AbsAnimal animal1 = null;
+
                     switch (AnimalTypeData.valueOf(typeAnimal.trim().toUpperCase())) {
                         case CAT:
-                            AbsAnimal cat = fillAnimalData(AnimalTypeData.CAT);
-                            cat.say();
-                            animal.add(cat);
-                            continue;
+                            animal1 = fillAnimalData(AnimalTypeData.CAT);
+                            break;
                         case DOG:
-                            AbsAnimal dog = fillAnimalData(AnimalTypeData.DOG);
-                            dog.say();
-                            animal.add(dog);
-                            continue;
+                            animal1 = fillAnimalData(AnimalTypeData.DOG);
+                            break;
                         case DUCK:
-                            AbsAnimal duck = fillAnimalData(AnimalTypeData.DUCK);
-                            duck.say();
-                            animal.add(duck);
-                            continue;
+                            animal1 = fillAnimalData(AnimalTypeData.DUCK);
+                            break;
                         default:
                             System.out.println("Неверный ввод, начните заново");
-                    };
+                    }
+                    animal1.say();
+                    animal.add(animal1);
+
                 case "LIST":
                     for (int i = 0; i < animal.size(); i++)
                         System.out.println(animal.get(i));
