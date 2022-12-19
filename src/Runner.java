@@ -14,7 +14,7 @@ public class Runner {
 
         String command;
         String typeAnimal;
-        ArrayList animal = new ArrayList();
+        ArrayList animals = new ArrayList();
 
         do {
             System.out.println("Выберите команду:\n " + CommandsData.ADD + "/" + CommandsData.LIST + "/" + CommandsData.EXIT);
@@ -26,27 +26,28 @@ public class Runner {
                             AnimalTypeData.CAT + "/" + AnimalTypeData.DOG + "/" + AnimalTypeData.DUCK);
                     typeAnimal = scanner.nextLine().trim().toLowerCase();
 
-                    AbsAnimal animal1 = null;
+                    AbsAnimal animal = null;
 
                     switch (AnimalTypeData.valueOf(typeAnimal.trim().toUpperCase())) {
                         case CAT:
-                            animal1 = fillAnimalData(AnimalTypeData.CAT);
+                            animal = fillAnimalData(AnimalTypeData.CAT);
                             break;
                         case DOG:
-                            animal1 = fillAnimalData(AnimalTypeData.DOG);
+                            animal = fillAnimalData(AnimalTypeData.DOG);
                             break;
                         case DUCK:
-                            animal1 = fillAnimalData(AnimalTypeData.DUCK);
+                            animal = fillAnimalData(AnimalTypeData.DUCK);
                             break;
                         default:
                             System.out.println("Неверный ввод, начните заново");
                     }
-                    animal1.say();
-                    animal.add(animal1);
+
+                    animal.say();
+                    animals.add(animal);
 
                 case "LIST":
-                    for (int i = 0; i < animal.size(); i++)
-                        System.out.println(animal.get(i));
+                    for (int i = 0; i < animals.size(); i++)
+                        System.out.println(animals.get(i));
                     break;
 
                 case "EXIT":
@@ -78,7 +79,7 @@ public class Runner {
             System.out.println("Повторите ввод");
             ageStr = scanner.next();
         }
-        if (ageStr.equals("0") || ageStr.contains("-")) {
+        while (ageStr.equals("0") || ageStr.contains("-")) {
             System.out.println("Введен неверный возраст");
             System.out.println("Повторите ввод");
             ageStr = scanner.next();
@@ -93,7 +94,7 @@ public class Runner {
             System.out.println("Повторите ввод");
             weightStr = scanner.next();
         }
-        if (weightStr.equals("0") || weightStr.contains("-")) {
+        while (weightStr.equals("0") || weightStr.contains("-")) {
             System.out.println("Введен неверный вес");
             System.out.println("Повторите ввод");
             weightStr = scanner.next();
