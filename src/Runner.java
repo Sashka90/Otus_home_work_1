@@ -26,6 +26,19 @@ public class Runner {
                             AnimalTypeData.CAT + "/" + AnimalTypeData.DOG + "/" + AnimalTypeData.DUCK);
                     typeAnimal = scanner.nextLine().trim().toLowerCase();
 
+                    boolean isExist = false;
+                    for (AnimalTypeData animalTypeData : AnimalTypeData.values()){
+                        if (animalTypeData.name().toLowerCase().equals(typeAnimal)){
+                            isExist = true;
+                            break;
+                        }
+                    }
+
+                    if(!isExist){
+                        System.out.println("Введен неверный тип животного");
+                        continue;
+                    }
+
                     AbsAnimal animal = null;
 
                     switch (AnimalTypeData.valueOf(typeAnimal.trim().toUpperCase())) {
